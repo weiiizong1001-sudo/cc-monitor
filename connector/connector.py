@@ -30,6 +30,7 @@ import os
 import select
 import socket
 import socketserver
+import sys
 import threading
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -43,6 +44,19 @@ except ImportError:
 # ----------------------------- 配置 -----------------------------
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+# PyInstaller --noconsole 打包时 sys.stdout / sys.stderr 为 None，
+# 代码里的 print() 会抛 'NoneType' object has no attribute 'write'，导致 exe 启动即闪退。
+# 这种情况下把输出重定向到同目录 connector_debug.log，既防崩又便于排查。
+if getattr(sys, "stdout", None) is None or getattr(sys, "stderr", None) is None:
+    try:
+        _log_file = open(os.path.join(HERE, "connector_debug.log"), "a", encoding="utf-8")
+        if getattr(sys, "stdout", None) is None:
+            sys.stdout = _log_file
+        if getattr(sys, "stderr", None) is None:
+            sys.stderr = _log_file
+    except Exception:
+        pass
 CONFIG_PATH = os.path.join(HERE, "connector_config.json")
 LOG_PATH = os.path.join(HERE, "connector_debug.log")
 HOSTS_PATH = os.path.join(HERE, "connector_hosts.json")
