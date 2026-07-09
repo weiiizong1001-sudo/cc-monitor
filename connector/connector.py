@@ -43,7 +43,12 @@ except ImportError:
 
 # ----------------------------- 配置 -----------------------------
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+# PyInstaller --onefile 打包后，__file__ 指向临时解压目录(_MEIxxxxx)，
+# 必须用 sys.executable 取 exe 自身所在目录，才能找到同目录的 connector_config.json。
+if getattr(sys, "frozen", False):
+    HERE = os.path.dirname(sys.executable)
+else:
+    HERE = os.path.dirname(os.path.abspath(__file__))
 
 # PyInstaller --noconsole 打包时 sys.stdout / sys.stderr 为 None，
 # 代码里的 print() 会抛 'NoneType' object has no attribute 'write'，导致 exe 启动即闪退。
