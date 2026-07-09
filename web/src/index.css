@@ -1,0 +1,229 @@
+@import 'tailwindcss';
+
+:root {
+  --ball-bg: #1f1f1f;
+  --ball-bg-dark: #1a1a1a;
+  --ball-bg-card: #2c2c2c;
+  --ball-border: #363636;
+  --ball-border-bright: #464646;
+  --ball-text: rgba(255, 255, 255, 0.9);
+  --ball-text-muted: rgba(255, 255, 255, 0.45);
+  --ball-accent: #746fff;
+  --ball-accent-soft: #6cb6ff;
+  --ball-permission: #cca700;
+  --ball-active: #3794ff;
+  --ball-success: #89d185;
+  --ball-stuck: #ff8d14;
+  --ball-danger: #d14249;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--ball-bg);
+  color: var(--ball-text);
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+
+  /* 开启抗锯齿，使深色背景下的浅色文字更加圆润细腻 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Output stream area is selectable */
+.selectable {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* ── Markdown rendering (assistant replies) ─────────────────────────── */
+.markdown {
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+.markdown > *:last-child {
+  margin-bottom: 0;
+}
+.markdown p {
+  margin: 0 0 0.85rem 0;
+  letter-spacing: 0.01em;
+}
+.markdown strong {
+  color: #fff;
+  font-weight: 600;
+}
+.markdown em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+}
+.markdown code {
+  /* 增强区分度：使用浅大自然半透明淡蓝底色与淡蓝色细边框 */
+  background: rgba(108, 182, 255, 0.09);
+  color: var(--ball-accent-soft);
+  border: 1px solid rgba(108, 182, 255, 0.22);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+.markdown pre {
+  background: var(--ball-bg-card);
+  border: 1px solid var(--ball-border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 0.8rem 0;
+  overflow-x: auto;
+}
+/* 避免代码块内部的 code 继承行内 code 的气泡背景 */
+.markdown pre code {
+  background: transparent;
+  color: var(--ball-text);
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.markdown h1 {
+  font-size: 1.35rem;
+  margin: 1.5rem 0 0.8rem;
+  border-bottom: 1px solid var(--ball-border);
+  padding-bottom: 0.3rem;
+}
+.markdown h2 {
+  font-size: 1.15rem;
+  margin: 1.25rem 0 0.6rem;
+}
+.markdown h3 {
+  font-size: 1.02rem;
+  margin: 1rem 0 0.5rem;
+}
+.markdown ul,
+.markdown ol {
+  margin: 0.4rem 0 0.8rem;
+  padding-left: 1.4rem;
+}
+.markdown li {
+  margin: 0.25rem 0;
+}
+.markdown li p {
+  margin-bottom: 0.25rem;
+}
+/* 增强区分度：采用更亮且富有亲和力的软蓝色，调整下划线距离，悬停时触发微弱气泡底色 */
+.markdown a {
+  color: var(--ball-accent-soft);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(108, 182, 255, 0.35);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  padding: 1px 3px;
+  margin: 0 -3px;
+  border-radius: 3px;
+  transition: all 0.15s ease-in-out;
+}
+.markdown a:hover {
+  color: #fff;
+  text-decoration-color: var(--ball-accent-soft);
+  background: rgba(108, 182, 255, 0.15);
+}
+/* 增强区分度：加粗左边框，融入极淡的浅紫色背景，使整段文字呈块状视觉聚焦 */
+.markdown blockquote {
+  border-left: 4px solid var(--ball-accent);
+  background: rgba(116, 111, 255, 0.05);
+  margin: 1rem 0;
+  padding: 0.6rem 1rem;
+  border-radius: 0 6px 6px 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+}
+.markdown blockquote p {
+  margin-bottom: 0;
+}
+.markdown hr {
+  border: none;
+  border-top: 1px solid var(--ball-border);
+  margin: 1rem 0;
+}
+.markdown table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 0.9em;
+}
+.markdown th,
+.markdown td {
+  border: 1px solid var(--ball-border);
+  padding: 6px 12px;
+}
+.markdown th {
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 600;
+  text-align: left;
+}
+.markdown tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+/* Thin scrollbars */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--ball-border-bright);
+  border-radius: 3px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes pulse-success {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(137, 209, 133, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(137, 209, 133, 0);
+  }
+}
+.pulse-success {
+  animation: pulse-success 2s ease-out 1;
+}
+
+@keyframes flash-permission {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(204, 167, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(204, 167, 0, 0);
+  }
+}
+.flash-permission {
+  animation: flash-permission 1s ease-in-out infinite;
+}

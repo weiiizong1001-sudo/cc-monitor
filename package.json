@@ -1,0 +1,30 @@
+{
+  "name": "cc-monitor",
+  "description": "Lightweight web monitor for Claude Code sessions — history list + live cc-terminal output",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["server", "web"],
+  "license": "MIT",
+  "bin": {
+    "cc-monitor": "./dist/cli.js"
+  },
+  "scripts": {
+    "build:web": "cd web && npm run build",
+    "build:server": "node esbuild.config.js",
+    "check-types": "tsc --noEmit",
+    "build": "npm run check-types && npm run build:server && npm run build:web",
+    "watch": "node esbuild.config.js --watch",
+    "start": "node dist/cli.js --port 3100 --host 0.0.0.0 --hook-host 127.0.0.1"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.2.0",
+    "@fastify/static": "^9.1.1",
+    "@fastify/websocket": "^11.2.0",
+    "fastify": "^5.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "esbuild": "^0.28.0",
+    "typescript": "~5.9.3"
+  }
+}

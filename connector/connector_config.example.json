@@ -1,0 +1,16 @@
+{
+  "jumphost": "YOUR_JUMPHOST_IP",
+  "jumphost_port": 22,
+  "jumphost_user": "your-jumphost-username",
+
+  "backend_user": "your-backend-username",
+  "backend_port": 22,
+  "backend_key_path": "",
+  "backend_key_passphrase": "",
+
+  "landing_port": 7080,
+  "forward_port": 18080,
+  "monitor_host": "127.0.0.1",
+  "monitor_port": 3100,
+  "auto_open_browser": true
+}

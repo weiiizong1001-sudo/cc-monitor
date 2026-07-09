@@ -1,0 +1,41 @@
+# ---- 依赖与构建产物 ----
+node_modules/
+dist/
+web/dist/
+*.tsbuildinfo
+
+# ---- 运行时 / 本地状态 ----
+# ~/.cc-monitor/ 下的 server.json / standalone-state.json / config.json / 日志
+# 不在仓库内，这里防范误提交同名文件
+*.log
+cc-monitor.log
+standalone-state.json
+server.json
+config.json
+
+# ---- connector 本地真实配置与缓存 ----
+# 只提交 *.example.json 模板；真实配置含跳板机/账号，禁止入库
+connector/connector_config.json
+connector/connector_hosts.json
+connector/connector_debug.log
+connector/build/
+connector/dist/
+connector/*.spec
+
+# ---- Python 字节码缓存 ----
+__pycache__/
+*.pyc
+
+# ---- 内部工作笔记（含本机环境信息，不公开）----
+STATUS.md
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
+
+# ---- Claude Code 本地配置 ----
+.claude/
